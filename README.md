@@ -42,7 +42,7 @@ PROI-for-Misinformation-Detection/
 ├── environment.yml                         # Conda environment configuration
 ├── LICENSE
 └── README.md
-
+```
 
 ## ⚠️ Data Availability Statement
 
