@@ -1,0 +1,2 @@
+You can download the model checkpoints directly from our dedicated repository:
+https://huggingface.co/WZ-IRM/PROI-Model-for-Misinformation-Detection
