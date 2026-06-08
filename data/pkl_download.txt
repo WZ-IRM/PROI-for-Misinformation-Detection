@@ -1,0 +1,2 @@
+You can download the processed data files directly from our repository:
+https://huggingface.co/datasets/WZ-IRM/PROI-for-Misinformation-Detection
