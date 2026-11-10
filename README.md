@@ -5,6 +5,23 @@ This repository contains the official implementation of the paper: **"Mitigating
 
 In this work, we propose **PROI** (Partitioned Representation with Oriented Interaction), a novel framework that integrates LLM-guided knowledge distillation with explicit orthogonal decomposition to rigorously separate multimodal features into event-related facts and non-event components. Furthermore, we introduce an Out-of-Distribution (OOD) validation-guided training strategy to maximize model robustness against temporal evolution and domain shifts.
 
+**Important Note: Why Does Twitter Have No Validation Set?**
+
+The Twitter benchmark used in this repository provides only official training and test splits, with no designated validation set. In practice, prior studies frequently rely on test-set feedback for checkpoint selection and hyperparameter tuning. Even when studies claim to employ a validation set, its independence is often questionable or impossible to verify: some studies do not release their source code, while publicly available implementations we examined include cases where the official test set is directly used as validation data or for checkpoint selection. Others simply fail to explain how their validation sets were constructed. Consequently, using test-set feedback for model selection has become a common practice in this research area. Under this widely adopted benchmark protocol, our Twitter results on the standard i.i.d. test set are consistent with existing evaluation practices and can serve as a meaningful comparison with studies following the same protocol. However, we do not consider such i.i.d. performance sufficient evidence of genuine model capability or generalization. As demonstrated in Table 7 of our paper, the conventionally trained Twitter model achieves only 0.515 ACC when transferred to the translated Weibo dataset, indicating a near-complete loss of discriminative capability.
+
+We attempted to construct an independent, temporally shifted OOD validation set for Twitter. However, this proved infeasible due to the lack of a suitable later dataset from the same platform (at least two years after the original benchmark) that preserves its characteristic format of short, image-text news posts. Furthermore, the original Twitter dataset suffers from substantial redundancy, with numerous samples sharing nearly identical semantics and describing the same events. Randomly splitting the data would inevitably introduce event overlap between training and validation sets (see the final section of this README, **"The Pitfalls of Existing Re-splitting Strategies"**, for a detailed discussion of why both random splitting and clustering-based re-splitting fail to guarantee strict event isolation). We therefore retain the official train/test protocol rather than introducing an unreliable validation split.
+
+**Our primary research focus is generalization, not leaderboard optimization.** To investigate whether multimodal misinformation detectors can learn transferable semantic representations and retain their discriminative capability under temporal and cross-platform distribution shifts, we establish an independent OOD validation and testing protocol using Weibo21, alongside cross-platform evaluation with translated datasets. Our findings demonstrate that high performance on conventional i.i.d. benchmarks alone cannot establish real-world robustness, while OOD validation-guided model selection provides a more reliable direction for developing generalizable misinformation detectors.
+
+## Citation
+
+> **If you find this work useful in your research, please consider citing our paper:**
+>
+> Zhi Wang and Shiyan Ou. "Mitigating shortcut learning in multimodal misinformation detection via LLM-guided orthogonal disentanglement." *Information Processing & Management*, Volume 64, Issue 1, Part B, Article 105043, 2027.
+>
+> https://doi.org/10.1016/j.ipm.2026.105043
+
+
 ## 📁 Repository Structure
 
 The repository is organized as follows to ensure reproducibility and clarity:
